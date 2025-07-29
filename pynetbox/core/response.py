@@ -16,7 +16,7 @@ limitations under the License.
 
 import copy
 from collections import OrderedDict
-from urllib.parse import urlsplit, urlparse
+from urllib.parse import urlparse, urlsplit
 
 import pynetbox.core.app
 from pynetbox.core.query import Request
@@ -478,13 +478,12 @@ class Record:
                 scheme=api_parsed.scheme,
                 netloc=api_parsed.netloc
             ).geturl()
-            
+
             req = Request(
                 base=corrected_url,
                 token=self.api.token,
                 http_session=self.api.http_session,
             )
-
             self._parse_values(next(req.get()))
             self.has_details = True
             return True
